@@ -11,20 +11,17 @@
         height: 100%;
         width: 100%;
       }
-      #video-container {
-        height: 100%;
-        width: 100%;
-        border-radius: 20px;
-        overflow: hidden;
-      }
     </style>
   </head>
   <body>
-    <div id="video-container"></div>
     <script>
-        const params = new URLSearchParams(window.location.search);
-        const room = params.get('room');
-      
+      const params = new URLSearchParams(window.location.search);
+      const room = params.get('room');
+      const subdomain = 'agoora'; // 👈 Replace this!
+
+      if (!room) {
+        document.body.innerHTML = '<h1>No room name provided</h1>';
+      } else {
         const callFrame = window.DailyIframe.createFrame({
           iframeStyle: {
             position: 'fixed',
@@ -36,8 +33,9 @@
           },
           showLeaveButton: true,
         });
-      
-        callFrame.join({ url: `https://agoora.daily.co/${room}` });
-      </script>      
+
+        callFrame.join({ url: `https://${subdomain}.daily.co/${room}` });
+      }
+    </script>
   </body>
 </html>
